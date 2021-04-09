@@ -1,10 +1,10 @@
 package com.example.albertsonsdemo.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.albertsonsdemo.R
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpObservers() {
-        viewModel.acronym.observe(this, Observer<AcronymWrapper>{
+        viewModel.acronym.observe(this, Observer<AcronymWrapper> {
             val httpCode = it.httpCode
             if (httpCode == 200) {
                 binding.tvError.visibility = View.GONE

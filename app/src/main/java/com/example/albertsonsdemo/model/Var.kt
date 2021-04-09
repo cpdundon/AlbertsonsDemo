@@ -4,7 +4,7 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class Var(
-    val freq: Int,
-    val lf: String,
-    val since: Int
+        val freq: Int,
+        val lf: String,
+        val since: Int
 )
