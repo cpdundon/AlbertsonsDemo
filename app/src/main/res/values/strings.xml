@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Albertsons Demo</string>
+    <string name="restError">There has been an error with the input.\nhttp Error Code: %d.\nError Message: %s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
