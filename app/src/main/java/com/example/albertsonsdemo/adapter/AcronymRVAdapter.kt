@@ -4,42 +4,35 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.albertsonsdemo.databinding.LongFormElementBinding
-import com.example.albertsonsdemo.model.AcronymItem
-import com.example.albertsonsdemo.model.Lf
+import com.example.albertsonsdemo.model.AcronymMeaning
 
-class AcronymRVAdapter(private val acronymList: List<AcronymItem>) : RecyclerView.Adapter<AcronymRVAdapter.AcronymViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AcronymViewHolder {
+class AcronymRVAdapter : RecyclerView.Adapter<AcronymRVAdapter.AcronymViewHolder>() {
 
-        val binding: LongFormElementBinding = LongFormElementBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-        )
-        return AcronymViewHolder(binding)
+    private val acronymList: MutableList<AcronymMeaning> = mutableListOf()
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+            LongFormElementBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+            ).let { AcronymViewHolder(it) }
+
+    override fun getItemCount() = acronymList.size
+
+    override fun onBindViewHolder(holder: AcronymViewHolder, position: Int) = with(holder) {
+        setMeaning(acronymList[position])
     }
 
-    override fun getItemCount(): Int {
-        return if (acronymList.isEmpty()) {
-            0
-        } else {
-            acronymList[0].lfs.size
-        }
+    fun update(newMeanings: List<AcronymMeaning>) = acronymList.run {
+        clear();addAll(newMeanings);notifyDataSetChanged()
     }
 
-    override fun onBindViewHolder(holder: AcronymViewHolder, position: Int) {
-        holder.setLongForm(acronymList[0].lfs, position)
-    }
+    class AcronymViewHolder(
+            private val binding: LongFormElementBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-    class AcronymViewHolder(private val binding: LongFormElementBinding) :
-            RecyclerView.ViewHolder(binding.root) {
-
-        fun setLongForm(lfsList: List<Lf>, position: Int) {
-            if (lfsList.isNotEmpty()) {
-                lfsList[position].also { it ->
-                    binding.tvLongForm.text = it.lf
-                }
-            }
+        fun setMeaning(meaning: AcronymMeaning) = with(binding) {
+            tvLongForm.text = meaning.meaning
         }
     }
 }
-

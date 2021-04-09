@@ -9,12 +9,8 @@ object AcronymRetroInstance {
     private const val BASE_URL = "http://www.nactem.ac.uk/software/acromine/"
 
     private val client = HttpLoggingInterceptor()
-            .apply {
-                level = HttpLoggingInterceptor.Level.BODY
-            }
-            .let { loginInterceptor ->
-                OkHttpClient.Builder().addInterceptor(loginInterceptor).build()
-            }
+            .apply { level = HttpLoggingInterceptor.Level.BODY }
+            .let { OkHttpClient.Builder().addInterceptor(it).build() }
 
     private val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
