@@ -47,9 +47,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpObservers() {
-        viewModel.dataState.observe(this) {
-
-        }
         viewModel.dataState.observe(this) { state ->
             binding.apply {
                 val rvData = if (state is DataState.Success) state.data else listOf()
